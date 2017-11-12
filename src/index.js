@@ -4,10 +4,6 @@ import ReactDOM from 'react-dom';
 
 // Import rescources
 import Main from './components/Main';
-import 'semantic-ui-less/semantic.less';
-
-
-
 
 
 // The dom-element where react-dom renders to

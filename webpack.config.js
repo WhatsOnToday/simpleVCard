@@ -4,7 +4,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const RewriteImportPlugin = require("less-plugin-rewrite-import");
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-//const UglifyJsPlugin = require('uglifyjs-webpack-plugin'); <-- Maby use ...
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 // Directory-constants
 const ROOT_DIR = path.resolve(__dirname);
@@ -40,16 +40,6 @@ module.exports = {
                             loader: "less-loader",
                             options: {
                                 paths: [ROOT_DIR, NODE_MODULES_DIR], // Instructs less-loader not to use the webpack resolver
-                                plugins: [
-
-                                    // (Ugly) workaround to configurate semantic-ui-less with files in the 
-                                    // SRC_DIR/semantic-ui directory
-                                    new RewriteImportPlugin({
-                                        paths: {
-                                            '../../theme.config': `${SRC_DIR}/semantic-ui/theme.config`,
-                                        },
-                                    }),
-                                ],
                             },
                         }
                     ],
@@ -75,10 +65,6 @@ module.exports = {
             },
         ]
     },
-
-    // This option provides a source-map after the project was built, so you can see
-    // errors in their original files rather than in the bundled js-file (client.js)
-    devtool: 'source-map', 
     
     // Include plugins
     plugins: [
@@ -86,7 +72,6 @@ module.exports = {
         // This setup will ...
         new HtmlWebpackPlugin({
             filename: 'index.html',
-            title: 'WhatsOn',
             template: `${SRC_DIR}/template.html`,
             
         }),
@@ -94,7 +79,7 @@ module.exports = {
         // This plugin will extract the style data into a seperate css file
         extractLess,
 
-       // new UglifyJsPlugin(),
+       new UglifyJsPlugin(),
     ],
 
     // Configuration of webpack-dev-server

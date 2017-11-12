@@ -12,14 +12,16 @@ const mailAddress = 'mail@whats-on.today';
 
 const Main = () => {
     return (
+        <div>
         <Grid centered columns={3} verticalAlign='middle' style={{height: "100%"}}>
             <Grid.Column>
-                <h1>What's On <Icon name='setting' size='large' loading /></h1>
-                <ParagraphList list={description}/>
-                <p className='mail'>  {mailText} <a href={'mailto:'+ mailAddress}>{mailAddress}</a></p>
+                <h1><Icon name='setting' size='small' loading />What's On<Icon name='setting' size='small' loading /></h1>
+                <p>{description[0]}<br/>{description[1]}</p>
+                <p className='mail'>  {mailText} <br/><a href={'mailto:'+ mailAddress}><Icon name='mail' size='small'className='mailIcon'/>{mailAddress}</a></p>
 
             </Grid.Column>  
         </Grid>
+        </div>
     )
 }
 
