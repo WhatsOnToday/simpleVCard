@@ -5,6 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const RewriteImportPlugin = require("less-plugin-rewrite-import");
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const Webpack = require('webpack');
 
 // Directory-constants
 const ROOT_DIR = path.resolve(__dirname);
@@ -79,7 +80,11 @@ module.exports = {
         // This plugin will extract the style data into a seperate css file
         extractLess,
 
-       new UglifyJsPlugin(),
+        new UglifyJsPlugin(),
+
+        new Webpack.DefinePlugin({
+            'process.env.NODE_ENV': JSON.stringify('production')
+        })
     ],
 
     // Configuration of webpack-dev-server
